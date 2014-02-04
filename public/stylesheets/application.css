@@ -8,3 +8,13 @@ div.box, div.cell {
 	height: 30px;
 
 }
+
+#sudoku {
+	font-size: 0;
+	text-align: center;
+}
+
+body {
+	text-align: center;
+	font-family: Arial;
+}
