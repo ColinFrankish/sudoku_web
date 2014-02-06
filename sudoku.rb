@@ -13,7 +13,7 @@ def random_sudoku
   # then we solve this (really hard!) sudoku
   sudoku.solve!
   # and give the output to the view as an array of chars
-  sudoku.to_s.chars 
+  sudoku.to_s.chars
 end
 
 def puzzle(sudoku)
@@ -24,6 +24,8 @@ end
 get '/' do
   sudoku = random_sudoku
   session[:solution] = sudoku
+  @solution = Array.new(81, 0)
+  @puzzle = Array.new(81, 0)
   @current_solution = puzzle(sudoku)
   erb :index
 end
@@ -101,21 +103,19 @@ post '/' do
   # so the form data (params['cell']) is sent using this order
   # However, our code expects it to be row by row, 
   # so we need to transform it.
-  cells = params["cell"]
+  cells = box_order_to_row_order(params["cell"]) # ?????
   session[:current_solution] = cells.map{|value| value.to_i }.join
   session[:check_solution] = true
   redirect to("/")
 end
 
 helpers do
-
-def cell_value(value)
+  def cell_value(value)
     value.to_i == 0 ? '' : value
-end
+  end
 
-def colour_class(solution_to_check, puzzle_value, current_solution_value, solution_value)
+  def colour_class(solution_to_check, puzzle_value, current_solution_value, solution_value)
     must_be_guessed = puzzle_value == 0
-    #I needed to change this 0 to "0" otherwise all ??
     tried_to_guess = current_solution_value.to_i != 0
     guessed_incorrectly = current_solution_value != solution_value
 

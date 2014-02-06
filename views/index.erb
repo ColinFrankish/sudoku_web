@@ -11,12 +11,13 @@
 			<form action ="/" method ="post">
 			<!-- all boxes rows and cells -->
 			<button>Check solution</button>
-			</form>
-		</div>
+			
+			<div>
+		
 			<!-- one div for each row -->
 			<% 3.times do |row| %>
 				<div class='row'>
-				<!-- we want to create separate dive elements and style them using CSS -->
+				<!-- we want to create separate div elements and style them using CSS -->
 				<% 3.times do |box| %>
 					<div class="box">
 					<!-- each box will have nine cells -->
@@ -25,9 +26,13 @@
 						<% 3.times do |cell| %>
 							<div class="cell">
 									<% cell_index = row * 27 + box * 3 + cell_row * 9 + cell %>
-									<% cell_value = @current_solution[cell_index] %>							
+									<% cell_value = @current_solution[cell_index] %>
+									 <% colour_class = colour_class(@check_solution, 
+									 @puzzle[cell_index], 
+									 @current_solution[cell_index], 
+									 @solution[cell_index])  %>	
 							<!-- every cell will have an input field -->
-								<input name="cell[]" type="text" maxlength="1" autocomplete="off" value="<%= cell_value %>" class="<% color_class %>">
+								<input type="text" maxlength="1" autocomplete="off" value="<%= cell_value %>" name="cell[]" class="<%= colour_class %>" > 
 							</div>
 						<% end %>
 					</div>
@@ -36,6 +41,7 @@
 		<% end %>
 		</div>
 	<% end %>
+	</form>
 	</div>
 	</body>	
 <html>
