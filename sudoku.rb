@@ -17,16 +17,22 @@ def random_sudoku
 end
 
 def puzzle(sudoku)
-  (0..81).to_a.sample(25).each { |i| sudoku[i] =""}
-  sudoku
+  new_sudoku = sudoku.dup
+  (0..81).to_a.sample(25).each { |i| new_sudoku[i] =" "}
+  new_sudoku
 end
 
 get '/' do
-  sudoku = random_sudoku
-  session[:solution] = sudoku
-  @solution = Array.new(81, 0)
-  @puzzle = Array.new(81, 0)
-  @current_solution = puzzle(sudoku)
+  prepare_to_check_solution
+  generate_new_puzzle_if_necessary
+  @current_solution = session[:current_solution] || session[:puzzle]
+  @solution = session[:solution]
+  @puzzle = session[:puzzle]
+  # sudoku = random_sudoku
+  # session[:solution] = sudoku
+  # @solution = Array.new(81, 0)
+  # @puzzle = Array.new(81, 0)
+  # @current_solution = puzzle(sudoku)
   erb :index
 end
 
@@ -75,6 +81,12 @@ def box_order_to_row_order(cells)
   }
 end
 
+def prepare_to_check_solution
+  @check_solution = session[:check_solution]
+  session[:check_solution] = nil
+end
+
+
 def generate_new_puzzle_if_necessary
   return if session[:current_solution]
   sudoku = random_sudoku
@@ -84,18 +96,15 @@ def generate_new_puzzle_if_necessary
 end
 
 get '/solution' do 
-  prepare_to_check_solution
-  generate_new_puzzle_if_necessary 
-  @current_solution = session[:solution] || session[:puzzle]
-  @solution = session[:solution]
+  #prepare_to_check_solution
+  #generate_new_puzzle_if_necessary 
+  @check_solution = true
+  @current_solution = session[:solution] #|| session[:puzzle]
   @puzzle = session[:puzzle]
+  @solution = session[:solution]
   erb :index
 end
 
-def prepare_to_check_solution
-  @check_solution = session[:check_solution]
-  session[:check_solution] = nil
-end
 
 post '/' do
   # the cells in HTML are ordered box by box 
