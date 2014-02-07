@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra-partial' 
+require 'sinatra/partial' 
 
 require_relative './lib/sudoku'
 require_relative './lib/cell'
@@ -47,7 +47,7 @@ def box_order_to_row_order(cells)
   # figure out where to look for the cells.
   # So, here i is the row number that we're "assembling" 
   # from three separate boxes using inject()
-  (0..8).to_a.inject([]) {|memo, i|
+  (0..8).to_a.inject([]) do |memo, i|
     # we're dividing an integer by an integer, it's called 
     # an integer division
     # the result will also be an integer, e.g. 0/3=0, 
@@ -83,7 +83,7 @@ def box_order_to_row_order(cells)
     # we add it to the memo, so inject will eventually return us 
     # an array of 81 elements that we need
     memo += three_rows_of_three.flatten
-  }
+  end
 end
 
 def prepare_to_check_solution
