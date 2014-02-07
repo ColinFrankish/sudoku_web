@@ -4,8 +4,8 @@ div.box, div.cell {
 }
 
 .cell input {
-	width: 30px;
-	height: 30px;
+	width: 50px;
+	height: 50px;
 
 }
 
@@ -24,5 +24,9 @@ body {
 }
 
 .value-provided {
-  background-color: #DDD;
+  background-color: #DFF;
+}
+
+#flash {
+	margin: 20px;
 }

@@ -1,12 +1,14 @@
 require 'sinatra'
 require 'sinatra/partial' 
+require 'rack-flash'
 
 require_relative './lib/sudoku'
 require_relative './lib/cell'
 require_relative './helpers/application.rb'
 
 set :partial_template_engine, :erb
-
+set :session_secret, "I'm the secret key to sign the cookie"
+use Rack::Flash
 enable :sessions
 
 
@@ -88,6 +90,9 @@ end
 
 def prepare_to_check_solution
   @check_solution = session[:check_solution]
+  if @check_solution
+    flash[:notice] = "Incorrect values are highlighted in yellow."
+  end
   session[:check_solution] = nil
 end
 
