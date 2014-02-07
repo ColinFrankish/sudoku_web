@@ -6,3 +6,7 @@ gem 'sinatra'
 gem 'shotgun'
 gem 'sinatra-partial'
 gem 'rack-flash3'
+
+group :production do
+  gem 'newrelic_rpm'
+end

@@ -11,6 +11,10 @@ set :session_secret, "I'm the secret key to sign the cookie"
 use Rack::Flash
 set :partial_template_engine, :erb
 
+configure :production do 
+  require 'newrelic_rpm'
+end
+
 
 def random_sudoku
   # we're using 9 numbers, 1 to 9, and 72 zeros as an input
