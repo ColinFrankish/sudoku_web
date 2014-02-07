@@ -10,9 +10,8 @@
 				<%= flash[:notice] %>
 			</div>
 		<div id="sudoku">
-			<form action ="/solution" method ="get">
+			<form action ="/" method ="post">
 				<!-- all boxes rows and cells -->
-				<button>Check solution</button>
 				<div class="cell">
 					<% 3.times do |row| %>
 						<div class='row'>
@@ -32,7 +31,16 @@
 							<% end %>
 						</div>
 					<% end %>
+					<button>Check Progress</button>
 				</div>
+				
+			</form>
+			
+			<form action ="solution" method ="get">
+				<button> See Full Solution </button>
+			</form> 
+			<form action ="/reset" method ="get">
+				<button> RESET GAME, NEW PUZZLE</button>
 			</form>
 		</div>
 	</body>	
