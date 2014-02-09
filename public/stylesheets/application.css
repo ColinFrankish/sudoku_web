@@ -16,7 +16,7 @@ div.box, div.cell {
 
 body {
 	text-align: center;
-	font-family: Arial;
+	font-family: Helvetica;
 }
 
 .incorrect {
@@ -30,3 +30,9 @@ body {
 #flash {
 	margin: 20px;
 }
+
+div {
+	background-color: AAACCC;
+	border: 1px solid black;
+}
+
