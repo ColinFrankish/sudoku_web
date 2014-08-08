@@ -4,8 +4,8 @@ div.box, div.cell {
 }
 
 .cell input {
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 
 }
 
@@ -32,7 +32,23 @@ body {
 }
 
 div {
-	background-color: AAACCC;
+	background-color: #AAACCC;
 	border: 1px solid black;
+}
+
+h1 {
+	font-weight: bolder;
+	font-size: 3.5em;
+	background-color: #e0feff;
+	padding: 0.5em;
+	border-radius: 1em;
+}
+
+button {
+	width: 15em;
+	height: 5em;
+	border-radius: 1em;
+	border-width: 2px;
+	border-color: black;
 }
 
